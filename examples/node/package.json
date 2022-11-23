@@ -1,0 +1,16 @@
+{
+  "name": "contract-builder-example-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "build:contract": "../../dist/cli.js src/Test.aes",
+    "watch:contract": "../../dist/cli.js --watch src/Test.aes"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aeternity/aepp-sdk": "github:aeternity/aepp-sdk-js#develop"
+  }
+}

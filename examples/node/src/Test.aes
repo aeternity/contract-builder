@@ -1,0 +1,4 @@
+include "Library.aes"
+
+contract Identity =
+  entrypoint getArg(x: int) = Library.sum(x, 10)

@@ -1,0 +1,79 @@
+{
+  "name": "@aeternity/contract-builder",
+  "version": "0.1.0",
+  "description": "Sophia smart contracts builder",
+  "main": "dist/loader.mjs",
+  "types": "dist/loader.d.ts",
+  "exports": "./dist/loader.js",
+  "bin": {
+    "ae-contract-builder": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc && babel src --out-dir dist --extensions .ts --source-maps true",
+    "commitlint": "commitlint --from develop",
+    "lint": "eslint . --ext .ts,.js,.mjs",
+    "test": "mocha './test/'",
+    "test:watch": "mocha './test/' --watch",
+    "prepare": "npm run build",
+    "prepublishOnly": "test/examples.sh",
+    "release": "standard-version --skip.tag"
+  },
+  "license": "ISC",
+  "keywords": [
+    "aeternity",
+    "blockchain",
+    "Sophia",
+    "smart contracts"
+  ],
+  "dependencies": {
+    "@aeternity/aepp-sdk": "github:aeternity/aepp-sdk-js#develop",
+    "@aeternity/aeproject": "^4.3.0",
+    "@types/lodash": "^4.14.190",
+    "commander": "^9.4.1",
+    "lodash": "^4.17.21",
+    "schema-utils": "^4.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aeternity/contract-builder"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/node": "^7.20.2",
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@babel/register": "^7.18.9",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "babel-loader": "^9.1.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
+    "chai": "^4.3.7",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "memfs": "^3.4.12",
+    "mocha": "^10.1.0",
+    "nyc": "^15.1.0",
+    "standard-version": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "browserslist": [
+    "node >= 14.19"
+  ],
+  "engines": {
+    "node": ">=14.19.0"
+  }
+}

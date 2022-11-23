@@ -1,0 +1,2 @@
+contract Identity =
+  entrypoint getArg(x: int) = x

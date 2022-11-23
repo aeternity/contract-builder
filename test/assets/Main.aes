@@ -1,0 +1,6 @@
+include "library/Library.aes"
+include "Set.aes"
+
+contract Main =
+  entrypoint getIntArg(x: int) = Library.sum(x, 10)
+  entrypoint getSetArg(x: Set.set(int)) = x
