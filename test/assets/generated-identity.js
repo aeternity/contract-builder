@@ -1,5 +1,4 @@
 /* eslint-disable */
-// @ts-nocheck
 import { Contract } from '@aeternity/aepp-sdk';
 
 const compiledContractOptions = {

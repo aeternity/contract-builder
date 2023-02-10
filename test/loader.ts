@@ -3,12 +3,13 @@ import { resolve } from 'path';
 import { expect } from 'chai';
 import { Contract } from '@aeternity/aepp-sdk';
 import compiler from './compiler';
+// @ts-expect-error will generate TypeScript code in future version
 import IdentityContract from './assets/generated-identity';
 
-const transformedIdentity = readFileSync(resolve(__dirname, './assets/generated-identity.ts'))
+const transformedIdentity = readFileSync(resolve(__dirname, './assets/generated-identity.js'))
   .toString()
   .split('\n')
-  .slice(2)
+  .slice(1)
   .join('\n');
 
 it('compiles contract and outputs JavaScript', async () => {
@@ -31,17 +32,10 @@ it('works with includes', async () => {
 
 it('generates a proper class', async () => {
   expect(IdentityContract.prototype).to.be.instanceOf(Contract);
-  // TODO: remove after resolving https://github.com/aeternity/aepp-sdk-js/issues/1713
-  interface ContractFields {
-    _aci: object;
-    $options: {
-      bytecode: string;
-    };
-  }
   [
     new IdentityContract({}),
     await IdentityContract.initialize({}),
-  ].forEach((contract: ContractFields) => {
+  ].forEach((contract) => {
     expect(contract._aci).to.be.eql({
       encodedAci: {
         contract: {
@@ -64,6 +58,7 @@ it('generates a proper class', async () => {
       externalEncodedAci: [],
       interface: 'main contract Identity =\n  entrypoint getArg : (int) => int\n',
     });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     expect(contract.$options.bytecode).to.be.equal(
       'cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTcuMC4xAMcrPgY=',
     );
