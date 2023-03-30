@@ -14,6 +14,7 @@ Firstly, you need to add this package to your project
 ```
 $ npm install @aeternity/contract-builder --save-dev
 ```
+To use `aesophia_cli` (enabled by default), `escript` needs to be available in PATH.
 
 ### Setup as a webpack loader
 
@@ -29,8 +30,10 @@ module.exports = {
 +      use: [{
 +        loader: `@aeternity/contract-builder`,
 +        options: {
++          compilerType: 'http', // or 'cli'
++          compilerPath: './foo/aesophia_cli',
 +          compilerUrl: 'http://localhost:3080/',
-+          // optional, uses 'https://v7.compiler.aepps.com/' by default
++          // the above is optional, uses CLI compiler by default
 +        },
       }],
     }],

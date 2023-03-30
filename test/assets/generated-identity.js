@@ -2,8 +2,9 @@
 import { Contract } from '@aeternity/aepp-sdk';
 
 const compiledContractOptions = {
-  "aci": {
-    "encodedAci": {
+  "bytecode": "cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTcuMS4wAP24uo4=",
+  "aci": [
+    {
       "contract": {
         "functions": [
           {
@@ -22,13 +23,10 @@ const compiledContractOptions = {
         "kind": "contract_main",
         "name": "Identity",
         "payable": false,
-        "type_defs": []
+        "typedefs": []
       }
-    },
-    "externalEncodedAci": [],
-    "interface": "main contract Identity =\n  entrypoint getArg : (int) => int\n"
-  },
-  "bytecode": "cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTcuMC4xAMcrPgY="
+    }
+  ]
 };
 
 export default class IdentityContract extends Contract {

@@ -3,8 +3,6 @@ import webpack from 'webpack';
 import { createFsFromVolume, Volume } from 'memfs';
 import { Options } from '../src/loader';
 
-const compilerUrl = process.env.COMPILER_URL ?? 'http://localhost:3080';
-
 // based on https://webpack.js.org/contribute/writing-a-loader/#testing
 export default async (fixture: string, options?: Options): Promise<webpack.Stats> => {
   const compiler = webpack({
@@ -23,10 +21,7 @@ export default async (fixture: string, options?: Options): Promise<webpack.Stats
         test: /\.aes$/,
         use: {
           loader: path.resolve(__dirname, '../src/loader.ts'),
-          options: {
-            compilerUrl,
-            ...options,
-          },
+          options,
         },
       }],
     },
