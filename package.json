@@ -26,8 +26,7 @@
     "smart contracts"
   ],
   "dependencies": {
-    "@aeternity/aepp-sdk": "github:aeternity/aepp-sdk-js#develop",
-    "@aeternity/aeproject": "^4.3.0",
+    "@aeternity/aepp-sdk": "^13.0.0",
     "@types/lodash": "^4.14.192",
     "commander": "^9.5.0",
     "lodash": "^4.17.21",

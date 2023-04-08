@@ -2,17 +2,24 @@ import type { LoaderContext } from 'webpack';
 import { validate } from 'schema-utils';
 import { parse, resolve } from 'path';
 import { camelCase, upperFirst } from 'lodash';
-import { utils } from '@aeternity/aeproject';
-import { Compiler, Contract } from '@aeternity/aepp-sdk';
+import { CompilerCli, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
 import { defaultCompilerUrl } from './utils';
 
-const { getFilesystem } = utils;
-
-export interface Options { compilerUrl?: string }
+export interface Options {
+  compilerType?: 'cli' | 'http';
+  compilerPath?: string;
+  compilerUrl?: string;
+}
 
 const optionsSchema = {
   type: 'object',
   properties: {
+    compilerType: {
+      type: 'string',
+    },
+    compilerPath: {
+      type: 'string',
+    },
     compilerUrl: {
       type: 'string',
     },
@@ -35,11 +42,9 @@ export default class ${name}Contract extends Contract {
 }
 `;
 
-async function loader(
-  context: LoaderContext<Options>,
-  sourceCode: string,
-): Promise<string> {
+async function loader(context: LoaderContext<Options>): Promise<string> {
   const options = {
+    compilerType: 'cli',
     compilerUrl: defaultCompilerUrl,
     ...context.getOptions(),
   };
@@ -49,28 +54,22 @@ async function loader(
     baseDataPath: 'options',
   });
 
-  const fileSystem = getFilesystem(context.resourcePath);
+  const fileSystem = getFileSystem(context.resourcePath);
   const resourceDir = parse(context.resourcePath).dir;
   Object.keys(fileSystem).forEach((file) => context.addDependency(resolve(resourceDir, file)));
-  const onCompiler = new Compiler(options.compilerUrl);
-  const contract = await Contract.initialize({ sourceCode, fileSystem, onCompiler });
+
+  const compiler = options.compilerType === 'cli'
+    ? new CompilerCli(options.compilerPath)
+    : new CompilerHttpNode(options.compilerUrl);
   const contractName = upperFirst(camelCase(parse(context.resourcePath).name));
 
-  const compiledContractOptions = {
-    // eslint-disable-next-line no-underscore-dangle
-    aci: contract._aci,
-    bytecode: await contract.$compile(),
-  };
-  return renderTemplate(contractName, compiledContractOptions);
+  return renderTemplate(contractName, await compiler.compile(context.resourcePath));
 }
 
-export default async function load(
-  this: LoaderContext<Options>,
-  sourceCode: string,
-): Promise<void> {
+export default async function load(this: LoaderContext<Options>): Promise<void> {
   const callback = this.async();
   try {
-    callback(null, await loader(this, sourceCode));
+    callback(null, await loader(this));
   } catch (error) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     callback(error);
