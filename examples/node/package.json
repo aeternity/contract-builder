@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aeternity/aepp-sdk": "^13.0.0-beta.0"
+    "@aeternity/aepp-sdk": "^13.0.0"
   }
 }
