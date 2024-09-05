@@ -30,11 +30,11 @@ jobs:
             npx commitlint --from $BASE --to $HEAD --verbose
           fi
       - run: npm run lint
-      - run: docker-compose up -d
+      - run: docker compose up -d
       - run: npx nyc npm run test
       - run: npx nyc report --reporter=text-lcov > coverage.lcov
       - uses: codecov/codecov-action@v3
         with:
           files: coverage.lcov
-      - run: docker-compose logs
+      - run: docker compose logs
         if: always()
