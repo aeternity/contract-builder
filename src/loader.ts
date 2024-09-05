@@ -26,10 +26,15 @@ const optionsSchema = {
   },
 } as const;
 
+function sortKeys(_key: string, value: unknown): unknown {
+  if (typeof value !== 'object' || value == null || Array.isArray(value)) return value;
+  return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)));
+}
+
 const renderTemplate = (name: string, options: unknown): string =>
   `import { Contract } from '@aeternity/aepp-sdk';
 
-const compiledContractOptions = ${JSON.stringify(options, null, 2)};
+const compiledContractOptions = ${JSON.stringify(options, sortKeys, 2)};
 
 export default class ${name}Contract extends Contract {
   constructor(options) {
