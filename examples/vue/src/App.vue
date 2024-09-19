@@ -1,9 +1,7 @@
 <template>
   <h2>Simple æpp — Contract Instance</h2>
   <div class="group">
-    <button @click="createPromise = create()">
-      Create
-    </button>
+    <button @click="createPromise = create()">Create</button>
     <div v-if="createPromise">
       <div>Contract Instance</div>
       <Value :value="createPromise.then(() => 'Ready')" />
@@ -13,9 +11,7 @@
   <template v-if="createPromise">
     <h2>Compile Contract</h2>
     <div class="group">
-      <button @click="compilePromise = compile()">
-        Compile
-      </button>
+      <button @click="compilePromise = compile()">Compile</button>
       <div v-if="compilePromise">
         <div>Bytecode</div>
         <Value :value="compilePromise" />
@@ -29,15 +25,10 @@
       <div>
         <div>Deploy argument</div>
         <div>
-          <input
-            v-model="deployArg"
-            placeholder="Deploy argument"
-          >
+          <input v-model="deployArg" placeholder="Deploy argument" />
         </div>
       </div>
-      <button @click="deployPromise = deploy()">
-        Deploy
-      </button>
+      <button @click="deployPromise = deploy()">Deploy</button>
       <div v-if="deployPromise">
         <div>Deployed Contract</div>
         <Value :value="deployPromise" />
@@ -51,15 +42,10 @@
       <div>
         <div>Call argument</div>
         <div>
-          <input
-            v-model="callArg"
-            placeholder="Call argument"
-          >
+          <input v-model="callArg" placeholder="Call argument" />
         </div>
       </div>
-      <button @click="callPromise = call()">
-        Call
-      </button>
+      <button @click="callPromise = call()">Call</button>
       <div v-if="callPromise">
         <div>Call Result</div>
         <Value :value="callPromise" />
@@ -87,7 +73,9 @@ export default {
     this.aeSdk = new AeSdk({
       nodes: [{ name: 'testnet', instance: new Node('https://testnet.aeternity.io') }],
       accounts: [
-        new MemoryAccount('9ebd7beda0c79af72a42ece3821a56eff16359b6df376cf049aee995565f022f840c974b97164776454ba119d84edc4d6058a8dec92b6edc578ab2d30b4c4200'),
+        new MemoryAccount(
+          '9ebd7beda0c79af72a42ece3821a56eff16359b6df376cf049aee995565f022f840c974b97164776454ba119d84edc4d6058a8dec92b6edc578ab2d30b4c4200',
+        ),
       ],
     });
   },

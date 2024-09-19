@@ -14,7 +14,8 @@ button {
   }
 }
 
-h1, h2 {
+h1,
+h2 {
   @extend .mt-2, .font-bold;
 }
 
@@ -26,7 +27,7 @@ h2 {
   @extend .text-2xl;
 }
 
-input:not([type=radio]) {
+input:not([type='radio']) {
   @extend .bg-gray-900, .text-white, .p-2, .w-full;
 }
 

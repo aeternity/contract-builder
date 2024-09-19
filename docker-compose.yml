@@ -3,4 +3,4 @@ services:
   compiler:
     image: aeternity/aesophia_http:${COMPILER_TAG}
     hostname: compiler
-    ports: ["3080:3080"]
+    ports: ['3080:3080']

@@ -26,8 +26,8 @@ const optionsSchema = {
   },
 } as const;
 
-const renderTemplate = (name: string, options: unknown): string => ''
-+ `import { Contract } from '@aeternity/aepp-sdk';
+const renderTemplate = (name: string, options: unknown): string =>
+  `import { Contract } from '@aeternity/aepp-sdk';
 
 const compiledContractOptions = ${JSON.stringify(options, null, 2)};
 
@@ -58,9 +58,10 @@ async function loader(context: LoaderContext<Options>): Promise<string> {
   const resourceDir = parse(context.resourcePath).dir;
   Object.keys(fileSystem).forEach((file) => context.addDependency(resolve(resourceDir, file)));
 
-  const compiler = options.compilerType === 'cli'
-    ? new CompilerCli(options.compilerPath)
-    : new CompilerHttpNode(options.compilerUrl);
+  const compiler =
+    options.compilerType === 'cli'
+      ? new CompilerCli(options.compilerPath)
+      : new CompilerHttpNode(options.compilerUrl);
   const contractName = upperFirst(camelCase(parse(context.resourcePath).name));
 
   return renderTemplate(contractName, await compiler.compile(context.resourcePath));

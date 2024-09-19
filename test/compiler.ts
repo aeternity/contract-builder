@@ -17,13 +17,15 @@ export default async (fixture: string, options?: Options): Promise<webpack.Stats
       '@aeternity/aepp-sdk': { root: '@aeternity/aepp-sdk' },
     },
     module: {
-      rules: [{
-        test: /\.aes$/,
-        use: {
-          loader: path.resolve(__dirname, '../src/loader.ts'),
-          options,
+      rules: [
+        {
+          test: /\.aes$/,
+          use: {
+            loader: path.resolve(__dirname, '../src/loader.ts'),
+            options,
+          },
         },
-      }],
+      ],
     },
   });
 

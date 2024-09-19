@@ -20,7 +20,5 @@
       "./node_modules/@aeternity/aepp-sdk/src/typings"
     ]
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }
