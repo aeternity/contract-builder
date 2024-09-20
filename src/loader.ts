@@ -1,9 +1,9 @@
 import type { LoaderContext } from 'webpack';
 import { validate } from 'schema-utils';
 import { parse, resolve } from 'path';
-import { camelCase, upperFirst } from 'lodash';
-import { CompilerCli, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
-import { defaultCompilerUrl } from './utils';
+import { camelCase, upperFirst } from 'lodash-es';
+import { CompilerCli, CompilerCli8, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
+import { defaultCompilerUrl } from './utils.js';
 
 export interface Options {
   compilerType?: 'cli' | 'http';
@@ -26,10 +26,15 @@ const optionsSchema = {
   },
 } as const;
 
-const renderTemplate = (name: string, options: unknown): string => ''
-+ `import { Contract } from '@aeternity/aepp-sdk';
+function sortKeys(_key: string, value: unknown): unknown {
+  if (typeof value !== 'object' || value == null || Array.isArray(value)) return value;
+  return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)));
+}
 
-const compiledContractOptions = ${JSON.stringify(options, null, 2)};
+const renderTemplate = (name: string, options: unknown): string =>
+  `import { Contract } from '@aeternity/aepp-sdk';
+
+const compiledContractOptions = ${JSON.stringify(options, sortKeys, 2)};
 
 export default class ${name}Contract extends Contract {
   constructor(options) {
@@ -58,9 +63,12 @@ async function loader(context: LoaderContext<Options>): Promise<string> {
   const resourceDir = parse(context.resourcePath).dir;
   Object.keys(fileSystem).forEach((file) => context.addDependency(resolve(resourceDir, file)));
 
-  const compiler = options.compilerType === 'cli'
-    ? new CompilerCli(options.compilerPath)
-    : new CompilerHttpNode(options.compilerUrl);
+  const compiler =
+    options.compilerType === 'cli'
+      ? options.compilerPath
+        ? new CompilerCli(options.compilerPath)
+        : new CompilerCli8()
+      : new CompilerHttpNode(options.compilerUrl);
   const contractName = upperFirst(camelCase(parse(context.resourcePath).name));
 
   return renderTemplate(contractName, await compiler.compile(context.resourcePath));
@@ -71,7 +79,6 @@ export default async function load(this: LoaderContext<Options>): Promise<void> 
   try {
     callback(null, await loader(this));
   } catch (error) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     callback(error);
   }
 }

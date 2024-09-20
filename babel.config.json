@@ -1,17 +1,16 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "include": [
-        "@babel/plugin-proposal-nullish-coalescing-operator",
-        "@babel/plugin-proposal-logical-assignment-operators"
-      ]
-      // TODO: switch to ESM after resolving https://github.com/webpack/webpack/issues/15930
-      // "modules": false
-    }],
+    [
+      "@babel/preset-env",
+      {
+        "include": [
+          "@babel/plugin-proposal-nullish-coalescing-operator",
+          "@babel/plugin-proposal-logical-assignment-operators"
+        ],
+        "modules": false
+      }
+    ],
     "@babel/preset-typescript"
   ],
-  "plugins": [
-    ["@babel/plugin-transform-runtime", { "corejs": 3 }],
-    ["transform-inline-environment-variables", { "include": ["npm_package_version"] }]
-  ]
+  "plugins": [["transform-inline-environment-variables", { "include": ["npm_package_version"] }]]
 }

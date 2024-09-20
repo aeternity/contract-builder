@@ -1,8 +1,6 @@
-/* eslint-disable */
 import { Contract } from '@aeternity/aepp-sdk';
 
 const compiledContractOptions = {
-  "bytecode": "cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTcuMS4wAP24uo4=",
   "aci": [
     {
       "contract": {
@@ -26,7 +24,9 @@ const compiledContractOptions = {
         "typedefs": []
       }
     }
-  ]
+  ],
+  "bytecode": "cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTguMC4wAKdY6qs=",
+  "warnings": []
 };
 
 export default class IdentityContract extends Contract {

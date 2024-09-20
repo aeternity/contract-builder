@@ -8,19 +8,18 @@
     "module": "node16",
     "target": "es2020",
     "lib": ["es2020", "dom"],
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "preserveConstEnums": true,
     "declaration": true,
     "downlevelIteration": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "typeRoots": [
       "./node_modules/@types",
       "./src/typings",
       "./node_modules/@aeternity/aepp-sdk/src/typings"
     ]
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

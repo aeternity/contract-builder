@@ -2,18 +2,16 @@ name: Test & build
 on: [push, pull_request]
 jobs:
   main:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - run: |
-          wget -q https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_25.0.4-1~ubuntu~jammy_amd64.deb
-          sudo apt install --allow-downgrades ./esl-erlang_25.0.4-1~ubuntu~jammy_amd64.deb
-      - uses: actions/checkout@v2
+      - run: sudo apt install erlang
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16.x
-      - uses: actions/cache@v3
+          node-version: 20.x
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -30,11 +28,11 @@ jobs:
             npx commitlint --from $BASE --to $HEAD --verbose
           fi
       - run: npm run lint
-      - run: docker-compose up -d
+      - run: docker compose up -d
       - run: npx nyc npm run test
       - run: npx nyc report --reporter=text-lcov > coverage.lcov
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           files: coverage.lcov
-      - run: docker-compose logs
+      - run: docker compose logs
         if: always()
