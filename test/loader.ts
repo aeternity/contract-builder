@@ -7,7 +7,7 @@ import compiler from './compiler';
 import IdentityContract from './assets/generated-identity';
 
 const transformedIdentity = readFileSync(
-  resolve(__dirname, './assets/generated-identity.js'),
+  resolve(import.meta.dirname, './assets/generated-identity.js'),
 ).toString();
 
 it('compiles contract and outputs JavaScript', async () => {

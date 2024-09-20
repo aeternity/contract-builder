@@ -9,7 +9,7 @@ it('generates arguments for webpack', () => {
   });
   command.parse(['contracts/Main.aes'], { from: 'user' });
   expect(args[0]).to.satisfy((s: string) => s.endsWith('/node'));
-  expect(args[1]).to.satisfy((s: string) => s.endsWith('/mocha'));
+  expect(args[1]).to.satisfy((s: string) => s.endsWith('/mocha/lib/cli/cli.js'));
   expect(args[2]).to.be.equal('--config');
   expect(args[3]).to.satisfy((s: string) => s.endsWith('/webpack.config.js'));
   expect(args[4]).to.be.equal('--env');
@@ -41,7 +41,7 @@ it('generates arguments for webpack to use http compiler', () => {
     { from: 'user' },
   );
   expect(args[0]).to.satisfy((s: string) => s.endsWith('/node'));
-  expect(args[1]).to.satisfy((s: string) => s.endsWith('/mocha'));
+  expect(args[1]).to.satisfy((s: string) => s.endsWith('/mocha/lib/cli/cli.js'));
   expect(args[2]).to.be.equal('--config');
   expect(args[3]).to.satisfy((s: string) => s.endsWith('/webpack.config.js'));
   expect(args[4]).to.be.equal('--env');

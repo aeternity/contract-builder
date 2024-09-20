@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { resolve, parse } from 'path';
-import { defaultCompilerUrl } from './utils';
+import { defaultCompilerUrl } from './utils.js';
 
 const compilerCliPathPlaceholder = '<provided by sdk package>';
 

@@ -1,9 +1,9 @@
 import type { LoaderContext } from 'webpack';
 import { validate } from 'schema-utils';
 import { parse, resolve } from 'path';
-import { camelCase, upperFirst } from 'lodash';
+import { camelCase, upperFirst } from 'lodash-es';
 import { CompilerCli, CompilerCli8, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
-import { defaultCompilerUrl } from './utils';
+import { defaultCompilerUrl } from './utils.js';
 
 export interface Options {
   compilerType?: 'cli' | 'http';

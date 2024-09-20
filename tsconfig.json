@@ -14,6 +14,7 @@
     "downlevelIteration": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "typeRoots": [
       "./node_modules/@types",
       "./src/typings",
