@@ -2,6 +2,7 @@ import type { LoaderContext } from 'webpack';
 import { validate } from 'schema-utils';
 import { parse, resolve } from 'path';
 import { camelCase, upperFirst } from 'lodash';
+// @ts-expect-error TODO: update sdk
 import { CompilerCli, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
 import { defaultCompilerUrl } from './utils';
 

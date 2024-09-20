@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { expect } from 'chai';
+// @ts-expect-error TODO: update sdk
 import { Contract } from '@aeternity/aepp-sdk';
 import compiler from './compiler';
 // @ts-expect-error will generate TypeScript code in future version

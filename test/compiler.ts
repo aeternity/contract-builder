@@ -29,7 +29,10 @@ export default async (fixture: string, options?: Options): Promise<webpack.Stats
     },
   });
 
-  compiler.outputFileSystem = createFsFromVolume(new Volume());
+  // TODO: remove type assertion after solving https://github.com/streamich/memfs/issues/1022
+  compiler.outputFileSystem = createFsFromVolume(new Volume()) as NonNullable<
+    typeof compiler.outputFileSystem
+  >;
   compiler.outputFileSystem.join = path.join.bind(path) as typeof path.join;
 
   return new Promise((resolve, reject) => {
