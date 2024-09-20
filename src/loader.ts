@@ -72,7 +72,6 @@ export default async function load(this: LoaderContext<Options>): Promise<void> 
   try {
     callback(null, await loader(this));
   } catch (error) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     callback(error);
   }
 }

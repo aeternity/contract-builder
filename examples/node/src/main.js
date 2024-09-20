@@ -1,5 +1,4 @@
 import { Node, AeSdk, MemoryAccount, Contract } from '@aeternity/aepp-sdk';
-// eslint-disable-next-line import/extensions,import/no-unresolved
 import TestContract from './Test.js';
 
 const aeSdk = new AeSdk({
@@ -11,7 +10,6 @@ const aeSdk = new AeSdk({
   ],
 });
 
-// eslint-disable-next-line no-underscore-dangle
 const contract = await TestContract.initialize(aeSdk._getOptions());
 console.log('Instanceof works correctly for contract', contract instanceof Contract);
 const deployInfo = await contract.$deploy([]);

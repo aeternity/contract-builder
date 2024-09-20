@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Contract } from '@aeternity/aepp-sdk';
 
 const compiledContractOptions = {

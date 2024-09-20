@@ -6,11 +6,9 @@ import compiler from './compiler';
 // @ts-expect-error will generate TypeScript code in future version
 import IdentityContract from './assets/generated-identity';
 
-const transformedIdentity = readFileSync(resolve(__dirname, './assets/generated-identity.js'))
-  .toString()
-  .split('\n')
-  .slice(1)
-  .join('\n');
+const transformedIdentity = readFileSync(
+  resolve(__dirname, './assets/generated-identity.js'),
+).toString();
 
 it('compiles contract and outputs JavaScript', async () => {
   const stats = await compiler('assets/Identity.aes');
@@ -67,7 +65,6 @@ it('generates a proper class', async () => {
         },
       },
     ]);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     expect(contract.$options.bytecode).to.be.equal(
       'cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTcuMS4wAP24uo4=',
     );
