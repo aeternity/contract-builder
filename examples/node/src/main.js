@@ -10,7 +10,7 @@ const aeSdk = new AeSdk({
   ],
 });
 
-const contract = await TestContract.initialize(aeSdk._getOptions());
+const contract = await TestContract.initialize(aeSdk.getContext());
 console.log('Instanceof works correctly for contract', contract instanceof Contract);
 const deployInfo = await contract.$deploy([]);
 console.log('Contract deployed at', deployInfo.address);

@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     create() {
-      return Contract.initialize(this.aeSdk._getOptions());
+      return Contract.initialize(this.aeSdk.getContext());
     },
     async compile() {
       return (await this.createPromise).$compile();

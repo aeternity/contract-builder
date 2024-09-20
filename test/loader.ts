@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { expect } from 'chai';
-// @ts-expect-error TODO: update sdk
 import { Contract } from '@aeternity/aepp-sdk';
 import compiler from './compiler';
 // @ts-expect-error will generate TypeScript code in future version
@@ -67,7 +66,7 @@ it('generates a proper class', async () => {
       },
     ]);
     expect(contract.$options.bytecode).to.be.equal(
-      'cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTcuMS4wAP24uo4=',
+      'cb_+GhGA6CnrCop0WHBS6ooHIsqMquYst202kMxRdF/vwCxqAv6rMC4O57+RNZEHwA3ADcAGg6CPwEDP/6AeCCSADcBBwcBAQCYLwIRRNZEHxFpbml0EYB4IJIZZ2V0QXJngi8AhTguMC4wAKdY6qs=',
     );
   });
 });

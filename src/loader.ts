@@ -2,8 +2,7 @@ import type { LoaderContext } from 'webpack';
 import { validate } from 'schema-utils';
 import { parse, resolve } from 'path';
 import { camelCase, upperFirst } from 'lodash';
-// @ts-expect-error TODO: update sdk
-import { CompilerCli, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
+import { CompilerCli, CompilerCli8, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
 import { defaultCompilerUrl } from './utils';
 
 export interface Options {
@@ -66,7 +65,9 @@ async function loader(context: LoaderContext<Options>): Promise<string> {
 
   const compiler =
     options.compilerType === 'cli'
-      ? new CompilerCli(options.compilerPath)
+      ? options.compilerPath
+        ? new CompilerCli(options.compilerPath)
+        : new CompilerCli8()
       : new CompilerHttpNode(options.compilerUrl);
   const contractName = upperFirst(camelCase(parse(context.resourcePath).name));
 

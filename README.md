@@ -67,7 +67,7 @@ In both cases, you would get a Contract's child class with inlined ACI and compi
 import MyContract from './MyContract.aes';
 // or import MyContract.js in case using ae-contract-builder
 
-const myContract = await MyContract.initialize(aeSdk._getOptions());
+const myContract = await MyContract.initialize(aeSdk.getContext());
 await myContract.$deploy();
 await myContract.foo('arg1', 'arg2');
 ```
