@@ -15,6 +15,7 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
+    "skipLibCheck": true, // TODO: disable after fixing dependencies
     "typeRoots": ["./node_modules/@types", "./node_modules/@aeternity/aepp-sdk/src/typings"]
   },
   "include": ["src/**/*"]

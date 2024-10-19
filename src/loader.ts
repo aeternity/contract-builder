@@ -2,7 +2,7 @@ import type { LoaderContext } from 'webpack';
 import { validate } from 'schema-utils';
 import { parse, resolve } from 'path';
 import { camelCase, upperFirst } from 'lodash-es';
-import { CompilerCli, CompilerCli8, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
+import { CompilerCli, CompilerHttpNode, getFileSystem } from '@aeternity/aepp-sdk';
 import { defaultCompilerUrl } from './utils.js';
 
 export interface Options {
@@ -65,9 +65,7 @@ async function loader(context: LoaderContext<Options>): Promise<string> {
 
   const compiler =
     options.compilerType === 'cli'
-      ? options.compilerPath
-        ? new CompilerCli(options.compilerPath)
-        : new CompilerCli8()
+      ? new CompilerCli(options.compilerPath)
       : new CompilerHttpNode(options.compilerUrl);
   const contractName = upperFirst(camelCase(parse(context.resourcePath).name));
 
