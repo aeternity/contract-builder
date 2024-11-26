@@ -4,7 +4,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt install erlang
+      - run: sudo apt update && sudo apt install --no-install-recommends erlang
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
