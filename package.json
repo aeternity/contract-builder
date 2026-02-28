@@ -11,7 +11,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && babel src --out-dir dist --extensions .ts --source-maps true",
-    "commitlint": "commitlint --from develop",
+    "commitlint": "commitlint --from main",
     "lint": "prettier . --check && eslint .",
     "format": "prettier . --write",
     "test": "mocha './test/'",
